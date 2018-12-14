@@ -5,9 +5,6 @@ import com.alibaba.fastjson.JSON;
 import com.example.demojziyy1207.Beans.AppMesg;
 import com.example.demojziyy1207.Beans.ConnectBean;
 import com.example.demojziyy1207.Beans.Statistics;
-import com.example.demojziyy1207.Dao.StatisticsDao;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
 import java.util.List;
@@ -17,6 +14,8 @@ public class ToJson {
 
 
     public static String doEsJson(List<Statistics> list,List<ConnectBean> connectBeans,List<AppMesg> appMesgs){
+
+
 
         Map<String,String> conINMap = new HashMap<>();
         Map<String,String> conIUMap = new HashMap<>();

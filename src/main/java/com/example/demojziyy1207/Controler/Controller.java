@@ -30,25 +30,63 @@ public class Controller {
         List<ConnectBean> connectBeans = statisticsDao.getAllConName();
         List<AppMesg> appMesgs = statisticsDao.getAllAppMesg();
 
-        List<Statistics> list = null;//statisticsDao.getData(0);
-        for (int i = 0; i<1000000000; i++) {
-            list = statisticsDao.getData(1000 * i);
+        List<Statistics> list = null;
+        for (int i = 950; i<1000000000; i++) {
+            System.out.println("--------------------------------------");
+            Date startdate =new Date();
+
+            System.out.println("The program start time =" + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(startdate));
+
+            //查询开始时间
+            long searchStart = new Date().getTime();
+
+            //------------------
+            int i2 =9 ;
+
+
+
+
+
+            int i1 = i2*1000  ;
+            //mysql查询出的数据
+           list = statisticsDao.getData((10000 * i + i1),(10000 * i + i1+1000));
+           // list = statisticsDao. getDatafirst((1000 * i));
+
+            //查询结束时间
+            long searchEnd = new Date().getTime();
+            //查询时间
+            System.out.println("-Search Time = " + (searchEnd - searchStart));
+
+
+
             if(list.size() == 0) {
                 break;
             }
-            System.out.println("------di " + i + "zu 1000 tiao");
             String startTime  = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
 
+            //插入开始时间
             long date1 = new Date().getTime();
-            System.out.println("start" + startTime);
+
+            System.out.println("Start  insert time" +startTime);
+
+
+
 
             String json = ToJson.doEsJson(list,connectBeans,appMesgs);
 
             SendInfo.sendInfo(json);
             long date2 = new Date().getTime();
             String endTime  = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
-            System.out.println("end" + endTime);
-            System.out.println("once time" + (date2-date1));
+            System.out.println("once end" + endTime);
+
+            //插入所用时间
+            System.out.println("insert time " + (date2 - date1));
+
+
+            System.out.println("-The " + i + "th group(1" + i2 +"000-1"+ (i2 + 1) +"000)" + "once time" + (date2-startdate.getTime()));
+
+
+
 
 
         }

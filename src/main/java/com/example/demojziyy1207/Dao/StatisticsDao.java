@@ -12,8 +12,63 @@ import java.util.List;
 @Mapper
 public interface StatisticsDao {
 
-    @Select("SELECT * FROM api_gateway_statistics_history LIMIT #{start},1000")
-    public abstract List<Statistics> getData(@Param("start") Integer start);
+    @Select("SELECT\n" +
+            "\ta.id,\n" +
+            "\ta.conid,\n" +
+            "\ta.userid,\n" +
+            "\ta.success,\n" +
+            "\ta.channel,\n" +
+            "\ta.starttime,\n" +
+            "\ta.endtime,\n" +
+            "\tDATE_FORMAT( starttime, \"%Y\" ) YEAR,\n" +
+            "\tDATE_FORMAT( starttime, \"%m\" ) MONTH,\n" +
+            "\tDATE_FORMAT( starttime, \"%e\" ) DAY,\n" +
+            "\tDATE_FORMAT( starttime, \"%H\" ) HOUR,\n" +
+            "\tUNIX_TIMESTAMP( starttime ) * 1000 starttime_long,\n" +
+            "\tUNIX_TIMESTAMP( endtime ) * 1000 endtime_long,\n" +
+            "\ta.arg,\n" +
+            "\ta.rspmsg,\n" +
+            "\ta.time,\n" +
+            "\ta.phonemodel,\n" +
+            "\ta.opersystem,\n" +
+            "\ta.appid,\n" +
+            "\ta.username,\n" +
+            "\ta.clientip \n" +
+            "FROM\n" +
+            "\tapi_gateway_statistics_history AS a \n" +
+            "WHERE\n" +
+            "\tid BETWEEN ( SELECT id FROM att WHERE uid = #{start} ) \n" +
+            "\tAND ( SELECT id FROM att WHERE uid = #{end} )")
+    public abstract List<Statistics> getData(@Param("start") Integer start,@Param("end") Integer end);
+
+    @Select("SELECT\n" +
+            "\ta.id,\n" +
+            "\ta.conid,\n" +
+            "\ta.userid,\n" +
+            "\ta.success,\n" +
+            "\ta.channel,\n" +
+            "\ta.starttime,\n" +
+            "\ta.endtime,\n" +
+            "\tDATE_FORMAT( starttime, \"%Y\" ) YEAR,\n" +
+            "\tDATE_FORMAT( starttime, \"%m\" ) MONTH,\n" +
+            "\tDATE_FORMAT( starttime, \"%e\" ) DAY,\n" +
+            "\tDATE_FORMAT( starttime, \"%H\" ) HOUR,\n" +
+            "\tUNIX_TIMESTAMP( starttime ) * 1000 starttime_long,\n" +
+            "\tUNIX_TIMESTAMP( endtime ) * 1000 endtime_long,\n" +
+            "\ta.arg,\n" +
+            "\ta.rspmsg,\n" +
+            "\ta.time,\n" +
+            "\ta.phonemodel,\n" +
+            "\ta.opersystem,\n" +
+            "\ta.appid,\n" +
+            "\ta.username,\n" +
+            "\ta.clientip \n" +
+            "FROM\n" +
+            "\tapi_gateway_statistics_history  a LIMIT #{start},1000")
+    public abstract List<Statistics> getDatafirst(@Param("start") Integer start);
+
+
+
 
     @Select("SELECT\n" +
             "\tid,appchname \n" +
