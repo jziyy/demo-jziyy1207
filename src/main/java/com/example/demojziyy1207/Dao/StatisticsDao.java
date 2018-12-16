@@ -102,8 +102,10 @@ public interface StatisticsDao {
     @Select("SELECT\n" +
             "\tid \n" +
             "FROM\n" +
-            "\tatt WHERE uid\n" +
-            "\tBETWEEN #{start} AND #{end}")
+            "\tatt \n" +
+            "WHERE\n" +
+            "\tuid BETWEEN  #{start} \n" +
+            "\tAND  #{end}")
     public abstract List<String> getID(@Param("start") Integer start,@Param("end") Integer end);
 
 
