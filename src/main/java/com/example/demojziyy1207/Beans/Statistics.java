@@ -13,25 +13,7 @@ public class Statistics implements Serializable{
 	private String userid;			//用户名或用户id
 	private String success;			//访问是否成功
 	private String channel;			//访问渠道
-
-	public String getStarttime() {
-		return starttime;
-	}
-
-	public String getEndtime() {
-		return endtime;
-	}
-
 	private String starttime;			//访问开始时间
-
-	public void setStarttime(String starttime) {
-		this.starttime = starttime;
-	}
-
-	public void setEndtime(String endtime) {
-		this.endtime = endtime;
-	}
-
 	private String endtime;			//访问结束时间
 	private String errormsg;		//访问错误信息
 	private String arg;				//请求参数
@@ -45,8 +27,8 @@ public class Statistics implements Serializable{
 	private String month;
 	private String day;
 	private String hour;
-	private long starttime_long;
-	private long endtime_long;
+	private String starttime_long;
+	private String endtime_long;
 
 	@Override
 	public String toString() {
@@ -75,10 +57,28 @@ public class Statistics implements Serializable{
 				", month='" + month + '\'' +
 				", day='" + day + '\'' +
 				", hour='" + hour + '\'' +
-				", starttime_long=" + starttime_long +
-				", endtime_long=" + endtime_long +
+				", starttime_long='" + starttime_long + '\'' +
+				", endtime_long='" + endtime_long + '\'' +
 				'}';
 	}
+
+	public void setStarttime(String starttime) {
+		this.starttime = starttime;
+	}
+
+	public void setEndtime(String endtime) {
+		this.endtime = endtime;
+	}
+
+
+	public String getStarttime() {
+		return starttime;
+	}
+
+	public String getEndtime() {
+		return endtime;
+	}
+
 
 	public String getPath() {
 		return path;
@@ -256,19 +256,19 @@ public class Statistics implements Serializable{
 		this.hour = hour;
 	}
 
-	public long getStarttime_long() {
+	public String getStarttime_long() {
 		return starttime_long;
 	}
 
-	public void setStarttime_long(long starttime_long) {
+	public void setStarttime_long(String starttime_long) {
 		this.starttime_long = starttime_long;
 	}
 
-	public long getEndtime_long() {
+	public String getEndtime_long() {
 		return endtime_long;
 	}
 
-	public void setEndtime_long(long endtime_long) {
+	public void setEndtime_long(String endtime_long) {
 		this.endtime_long = endtime_long;
 	}
 }

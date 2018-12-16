@@ -67,7 +67,21 @@ public interface StatisticsDao {
             "\tapi_gateway_statistics_history  a LIMIT #{start},1000")
     public abstract List<Statistics> getDatafirst(@Param("start") Integer start);
 
+    @Select("SELECT\n" +
+            "\tid,\n" +
+            "\tsuccess \n" +
+            "FROM\n" +
+            "\tapi_gateway_statistics_history \n" +
+            "\tLIMIT #{start},1000")
+    public abstract List<Statistics> getSuccess(@Param("start") Integer start);
 
+    @Select("SELECT\n" +
+            "\tid,\n" +
+            "\terrormsg \n" +
+            "FROM\n" +
+            "\tapi_gateway_statistics_history \n" +
+            "\tLIMIT #{start},1000")
+    public abstract List<Statistics> getErrormsg(@Param("start") Integer start);
 
 
     @Select("SELECT\n" +
@@ -85,5 +99,12 @@ public interface StatisticsDao {
             "\tapi_gateway_connect")
     public abstract List<ConnectBean> getAllConName();
 
+    @Select("SELECT\n" +
+            "\tid \n" +
+            "FROM\n" +
+            "\tatt WHERE uid\n" +
+            "\tBETWEEN #{start} AND #{end}")
+    public abstract List<String> getID(@Param("start") Integer start,@Param("end") Integer end);
 
-}
+
+    }

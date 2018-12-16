@@ -42,4 +42,40 @@ public class ToJson {
         }
         return stringBuffer.toString();
     }
+
+
+    public static String toSendVerifyJson(List<String> list){
+       String json ="{\n" +
+               "            \"docs\" : [\n" +
+
+
+
+               "    ]\n" +
+               "        }";
+
+       StringBuffer stringBuffer =new StringBuffer();
+       stringBuffer.append("{\n" +
+               "            \"docs\" : [\n");
+
+
+        for (int i = 0; i < list.size(); i++) {
+            stringBuffer.append(   "            {\n" +
+                    "                \"_id\" : \""+ list.get(i) +"\",\n" +
+                    "                    \"stored_fields\" : [\"id\"]\n" +
+                    "            },\n");
+            if (i==list.size() -1){
+                stringBuffer.append(   "            {\n" +
+                        "                \"_id\" : \""+ list.get(i) +"\",\n" +
+                        "                    \"stored_fields\" : [\"id\"]\n" +
+                        "            }\n");
+            }
+        }
+
+
+       stringBuffer.append( "    ]\n" +
+               "        }");
+
+            return stringBuffer.toString();
+
+    }
 }
